@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  tg-riadn-nginx:
+    container_name: tg-riadn-nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    environment:
+      PHP_HOST: tg-riadn-fpm
+
+  tg-riadn-fpm:
+    container_name: tg-riadn-fpm
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+
+  tg-riadn-db:
+    container_name: tg-riadn-db
+    image: percona:5.7

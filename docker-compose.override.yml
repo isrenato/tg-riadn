@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  tg-riadn-nginx:
+    networks:
+      - tg-riadn-internal
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html/
+      - ./docker/server-logs:/var/log/nginx
+
+  tg-riadn-fpm:
+    networks:
+      - tg-riadn-internal
+    environment:
+      XDEBUG_CONFIG: client_host=docker.for.mac.localhost remote_enable=1 client_port=9001
+      XDEBUG_MODE: debug
+      PHP_IDE_CONFIG: serverName=localhost
+      DATABASE_URL: 'mysql://tg-riadn:tg-riadn@tg-riadn-db/tg-riadn'
+    volumes:
+      - ./:/var/www/html/
+      - ./docker/server-logs:/var/log/nginx
+
+  tg-riadn-db:
+    ports:
+      - 3304:3306
+    volumes:
+      - tg-riadn-db-data:/var/lib/mysql
+    networks:
+      - tg-riadn-internal
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'tg-riadn'
+      MYSQL_USER: 'tg-riadn'
+      MYSQL_PASSWORD: 'tg-riadn'
+
+networks:
+  tg-riadn-internal:
+    driver: bridge
+
+volumes:
+  tg-riadn-db-data: ~
