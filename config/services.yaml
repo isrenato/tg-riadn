@@ -11,6 +11,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
     psr18.guzzle_client:
       class: GuzzleHttp\Client
       arguments:
@@ -18,3 +19,13 @@ services:
 
     psr17.guzzle_factory:
       class: GuzzleHttp\Psr7\HttpFactory
+
+    Symfony\Component\Serializer\Encoder\JsonEncoder:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+        tags:
+            - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
+
+    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        tags:
+            - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
