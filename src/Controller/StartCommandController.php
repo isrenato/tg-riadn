@@ -19,7 +19,7 @@ class StartCommandController extends TelegramCommand
     }
 
     #[OnCommand('/start')]
-    public function __invoke(Type\Message $message, string $arg1 = '', string $arg2 = ''): SendMessage
+    public function __invoke(Type\Message $message): SendMessage
     {
         $this->manager->process($message->from);
 

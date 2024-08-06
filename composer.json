@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^7.9",
         "luzrain/telegram-bot-bundle": "*",
         "nyholm/psr7": "*",
+        "phpstan/phpstan-phpunit": "^1.4",
         "symfony/console": "7.1.*",
         "symfony/dotenv": "7.1.*",
         "symfony/flex": "^2",
@@ -23,6 +24,14 @@
         "symfony/serializer": "7.1.*",
         "symfony/validator": "7.1.*",
         "symfony/yaml": "7.1.*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.61",
+        "phpmd/phpmd": "^2.15",
+        "phpstan/phpstan": "^1.11",
+        "phpstan/phpstan-doctrine": "^1.5",
+        "phpunit/phpunit": "^11.3",
+        "symfony/maker-bundle": "^1.60"
     },
     "config": {
         "allow-plugins": {
@@ -53,6 +62,7 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
+        "php-md": "@php vendor/bin/phpmd src/ text phpmd.xml cleancode,codesize,controversial,design,naming,unusedcode",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
@@ -72,8 +82,5 @@
             "allow-contrib": false,
             "require": "7.1.*"
         }
-    },
-    "require-dev": {
-        "symfony/maker-bundle": "^1.60"
     }
 }
