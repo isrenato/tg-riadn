@@ -50,8 +50,3 @@ services:
         class: App\Controller\StartCommandController
         arguments:
           $manager: "@telegramUserManager"
-
-#    App\Controller\MainController:
-#        class: App\Controller\MainController
-#        arguments:
-#          $manager: "@telegramUserManager"
