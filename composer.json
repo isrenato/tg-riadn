@@ -62,7 +62,7 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
-        "php-md": "@php vendor/bin/phpmd src/ text phpmd.xml cleancode,codesize,controversial,design,naming,unusedcode",
+        "php-md": "@php vendor/bin/phpmd src/ phpmd.xml text cleancode,codesize,controversial,design,naming,unusedcode",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

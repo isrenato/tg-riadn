@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<ruleset>
+
+    <description>Custom ruleset for Behance code standards</description>
+
+    <!-- Rues are imported individually to allow for easy configuration -->
+    <!-- Property names and values can be found here: http://phpmd.org/rules/index.html -->
+
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="ignore-whitespace" value="true" />
+            <property name="minimum" value="150" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml/Superglobals" />
+
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <properties>
+            <property name="minimum" value="50" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/design.xml/DepthOfInheritance" />
+    <rule ref="rulesets/design.xml/EvalExpression" />
+    <rule ref="rulesets/design.xml/ExitExpression" />
+    <rule ref="rulesets/design.xml/GotoStatement" />
+    <rule ref="rulesets/design.xml/NumberOfChildren" />
+
+    <rule ref="rulesets/naming.xml/BooleanGetMethodName">
+        <properties>
+            <property name="checkParameterizedMethods" value="true" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/ConstantNamingConventions" />
+    <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass" />
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" value="40" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortMethodName" />
+    <rule ref="rulesets/naming.xml/ShortVariable" >
+        <properties>
+            <property name="minimum" value="1" />
+            <property name="exceptions" value="e" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter" />
+    <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable" />
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateField" />
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod" />
+
+</ruleset>
