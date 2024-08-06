@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\StorageInteractionManager;
+namespace App\Manager;
 
 use App\Entity\EntityInterface;
 use App\Manager\ManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final readonly class Manager implements ManagerInterface
 {
     public function __construct(
-        private readonly EntityManagerInterface $manager
+        private EntityManagerInterface $manager
     ) {
     }
 
@@ -24,12 +23,6 @@ final readonly class Manager implements ManagerInterface
 
     public function update(): void
     {
-        $this->manager->flush();
-    }
-
-    public function delete($entity): void
-    {
-        $this->manager->remove($entity);
         $this->manager->flush();
     }
 }

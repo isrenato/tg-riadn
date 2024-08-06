@@ -11,6 +11,4 @@ interface ManagerInterface
     public function create(EntityInterface $entity): void;
 
     public function update(): void;
-
-    public function delete(EntityInterface $entity): void;
 }

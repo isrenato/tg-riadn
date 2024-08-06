@@ -9,8 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 #[ORM\Entity(repositoryClass: TelegramUserRepository::class)]
+#[HasLifecycleCallbacks]
 class TelegramUser implements EntityInterface
 {
     #[ORM\Id]
@@ -21,14 +23,17 @@ class TelegramUser implements EntityInterface
     #[ORM\Column(length: 64)]
     private ?string $username = null;
 
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     private ?int $telegramId = null;
 
-    /**
-     * @var Collection<int, Location>
-     */
     #[ORM\OneToMany(targetEntity: Location::class, mappedBy: 'telegramUser', orphanRemoval: true)]
     private Collection $locations;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
@@ -71,9 +76,6 @@ class TelegramUser implements EntityInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Location>
-     */
     public function getLocations(): Collection
     {
         return $this->locations;
@@ -92,12 +94,48 @@ class TelegramUser implements EntityInterface
     public function removeLocation(Location $location): static
     {
         if ($this->locations->removeElement($location)) {
-            // set the owning side to null (unless already changed)
             if ($location->getTelegramUser() === $this) {
                 $location->setTelegramUser(null);
             }
         }
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->setUpdatedAtValue();
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

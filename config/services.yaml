@@ -29,3 +29,29 @@ services:
         class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
         tags:
             - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
+
+    telegramUserDataTransfomer:
+        class: App\DataTransformer\TGUserDataTransformer
+
+    telegramUserRepository:
+        class: App\Repository\TelegramUserRepository
+
+    manager:
+        class: App\Manager\Manager
+
+    telegramUserManager:
+        class: App\Manager\TelegramUserManager
+        arguments:
+          $transformer: "@telegramUserDataTransfomer"
+          $repository: "@telegramUserRepository"
+          $manager: "@manager"
+
+    App\Controller\StartCommandController:
+        class: App\Controller\StartCommandController
+        arguments:
+          $manager: "@telegramUserManager"
+
+#    App\Controller\MainController:
+#        class: App\Controller\MainController
+#        arguments:
+#          $manager: "@telegramUserManager"

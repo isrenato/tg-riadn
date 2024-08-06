@@ -11,4 +11,3 @@
 ###< symfony/framework-bundle ###
 /.idea
 docker/server-logs
-
