@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[HasLifecycleCallbacks]
-class Image
+class Image implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

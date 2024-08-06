@@ -9,7 +9,7 @@ use App\Entity\TelegramUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Luzrain\TelegramBotApi\Type\User;
 
-final readonly class TelegramUserManager
+final readonly class TelegramUserManager implements TelegramUserManagerInterface
 {
     public function __construct(
         private TGUserDataTransformerInterface $transformer,
@@ -18,7 +18,7 @@ final readonly class TelegramUserManager
     ) {
     }
 
-    public function process(?User $user): TelegramUser
+    public function process(User $user): TelegramUser
     {
         $telegramUserEntity = $this->repository->findOneBy(['telegramId' => $user->id]);
 

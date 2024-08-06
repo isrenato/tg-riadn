@@ -50,3 +50,28 @@ services:
         class: App\Controller\StartCommandController
         arguments:
           $manager: "@telegramUserManager"
+
+    telegramBotApiProvider:
+      class: Luzrain\TelegramBotApi\BotApi
+      arguments:
+        $requestFactory: "@nyholm.psr7.psr17_factory"
+        $streamFactory: "@nyholm.psr7.psr17_factory"
+        $client: "@psr18.guzzle_client"
+        $token: '%env(string:TG_API_TOKEN)%'
+
+    telegramImageService:
+        class: App\Service\TelegramImageService
+        arguments:
+          $botApiProvider: "@telegramBotApiProvider"
+
+    imageManager:
+        class: App\Manager\ImageManager
+        arguments:
+          $telegramImageService: "@telegramImageService"
+          $userRepository: "@telegramUserRepository"
+          $manager: "@manager"
+
+    App\Controller\PhotoMessageController:
+          class: App\Controller\PhotoMessageController
+          arguments:
+            $manager: "@imageManager"

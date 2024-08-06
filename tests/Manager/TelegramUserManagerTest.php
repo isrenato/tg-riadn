@@ -11,14 +11,13 @@ use App\Manager\TelegramUserManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Luzrain\TelegramBotApi\Type\User;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 
 class TelegramUserManagerTest extends TestCase
 {
-    private $transformer;
-    private $repository;
-    private $manager;
-    private $telegramUserManager;
+    private TGUserDataTransformerInterface $transformer;
+    private ServiceEntityRepository $repository;
+    private ManagerInterface $manager;
+    private TelegramUserManager $telegramUserManager;
 
     protected function setUp(): void
     {
