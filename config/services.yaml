@@ -64,12 +64,20 @@ services:
         arguments:
           $botApiProvider: "@telegramBotApiProvider"
 
+    telegramFileService:
+        class: App\Service\TelegramFileService
+
+    tesseractOCRService:
+        class: App\Service\TesseractOCRService
+
     imageManager:
         class: App\Manager\ImageManager
         arguments:
           $telegramImageService: "@telegramImageService"
           $userRepository: "@telegramUserRepository"
           $manager: "@manager"
+          $fileService: "@telegramFileService"
+          $tesseractService: "@tesseractOCRService"
 
     App\Controller\PhotoMessageController:
           class: App\Controller\PhotoMessageController

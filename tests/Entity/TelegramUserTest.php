@@ -6,8 +6,6 @@ namespace App\Tests\Entity;
 
 use App\Entity\Location;
 use App\Entity\TelegramUser;
-use DateTimeImmutable;
-use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\TestCase;
 
 class TelegramUserTest extends TestCase
@@ -55,7 +53,7 @@ class TelegramUserTest extends TestCase
     public function testSetAndGetCreatedAt(): void
     {
         $telegramUser = new TelegramUser();
-        $now = new DateTimeImmutable();
+        $now = new \DateTimeImmutable();
         $telegramUser->setCreatedAt($now);
 
         $this->assertSame($now, $telegramUser->getCreatedAt());
@@ -64,7 +62,7 @@ class TelegramUserTest extends TestCase
     public function testSetAndGetUpdatedAt(): void
     {
         $telegramUser = new TelegramUser();
-        $now = new DateTimeImmutable();
+        $now = new \DateTimeImmutable();
         $telegramUser->setUpdatedAt($now);
 
         $this->assertSame($now, $telegramUser->getUpdatedAt());
@@ -75,8 +73,8 @@ class TelegramUserTest extends TestCase
         $telegramUser = new TelegramUser();
         $telegramUser->setCreatedAtValue();
 
-        $this->assertInstanceOf(DateTimeImmutable::class, $telegramUser->getCreatedAt());
-        $this->assertInstanceOf(DateTimeImmutable::class, $telegramUser->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $telegramUser->getCreatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $telegramUser->getUpdatedAt());
     }
 
     public function testSetUpdatedAtValue(): void
@@ -84,6 +82,6 @@ class TelegramUserTest extends TestCase
         $telegramUser = new TelegramUser();
         $telegramUser->setUpdatedAtValue();
 
-        $this->assertInstanceOf(DateTimeImmutable::class, $telegramUser->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $telegramUser->getUpdatedAt());
     }
 }

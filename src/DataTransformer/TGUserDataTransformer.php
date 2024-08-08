@@ -9,7 +9,7 @@ use Luzrain\TelegramBotApi\Type\User;
 
 class TGUserDataTransformer implements TGUserDataTransformerInterface
 {
-    public function transform(User $source, TelegramUser $entity = null): TelegramUser
+    public function transform(User $source, ?TelegramUser $entity = null): TelegramUser
     {
         if (null === $entity) {
             $entity = new TelegramUser();

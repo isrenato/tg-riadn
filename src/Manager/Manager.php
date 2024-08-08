@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
-use App\Manager\ManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final readonly class Manager implements ManagerInterface

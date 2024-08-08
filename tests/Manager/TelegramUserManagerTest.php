@@ -39,7 +39,7 @@ class TelegramUserManagerTest extends TestCase
                 'id' => 12345,
                 'is_bot' => false,
                 'username' => 'testuser',
-                'first_name' => 'test'
+                'first_name' => 'test',
             ]
         );
 
@@ -68,7 +68,7 @@ class TelegramUserManagerTest extends TestCase
                 'id' => 12345,
                 'is_bot' => false,
                 'username' => 'testuser',
-                'first_name' => 'test'
+                'first_name' => 'test',
             ]
         );
 

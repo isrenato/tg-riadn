@@ -6,7 +6,6 @@ namespace App\Tests\Entity;
 
 use App\Entity\Image;
 use App\Entity\TelegramUser;
-use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
@@ -48,7 +47,7 @@ class ImageTest extends TestCase
     public function testSetAndGetCreatedAt(): void
     {
         $image = new Image();
-        $now = new DateTimeImmutable();
+        $now = new \DateTimeImmutable();
         $image->setCreatedAt($now);
 
         $this->assertSame($now, $image->getCreatedAt());
@@ -57,7 +56,7 @@ class ImageTest extends TestCase
     public function testSetAndGetUpdatedAt(): void
     {
         $image = new Image();
-        $now = new DateTimeImmutable();
+        $now = new \DateTimeImmutable();
         $image->setUpdatedAt($now);
 
         $this->assertSame($now, $image->getUpdatedAt());
@@ -68,8 +67,8 @@ class ImageTest extends TestCase
         $image = new Image();
         $image->setCreatedAtValue();
 
-        $this->assertInstanceOf(DateTimeImmutable::class, $image->getCreatedAt());
-        $this->assertInstanceOf(DateTimeImmutable::class, $image->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $image->getCreatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $image->getUpdatedAt());
     }
 
     public function testSetUpdatedAtValue(): void
@@ -77,6 +76,6 @@ class ImageTest extends TestCase
         $image = new Image();
         $image->setUpdatedAtValue();
 
-        $this->assertInstanceOf(DateTimeImmutable::class, $image->getUpdatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $image->getUpdatedAt());
     }
 }

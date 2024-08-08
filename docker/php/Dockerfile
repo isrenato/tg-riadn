@@ -6,9 +6,12 @@ RUN docker-php-ext-install opcache
 
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
-    libzip-dev
+    libzip-dev \
+    tesseract-ocr \
+    tesseract-ocr-deu
 
 RUN docker-php-ext-install zip
+
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \

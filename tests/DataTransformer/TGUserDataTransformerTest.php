@@ -24,7 +24,7 @@ class TGUserDataTransformerTest extends \PHPUnit\Framework\TestCase
                 'id' => 12345,
                 'is_bot' => false,
                 'username' => 'testuser',
-                'first_name' => 'test'
+                'first_name' => 'test',
             ]
         );
 
@@ -42,7 +42,7 @@ class TGUserDataTransformerTest extends \PHPUnit\Framework\TestCase
                 'id' => 54321,
                 'is_bot' => false,
                 'username' => 'existinguser',
-                'first_name' => 'test'
+                'first_name' => 'test',
             ]
         );
 
