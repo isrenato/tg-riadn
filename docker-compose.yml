@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   tg-riadn-nginx:
     container_name: tg-riadn-nginx

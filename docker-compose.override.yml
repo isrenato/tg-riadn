@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   tg-riadn-nginx:
     networks:
@@ -23,6 +21,7 @@ services:
       - ./docker/server-logs:/var/log/nginx
 
   tg-riadn-db:
+    platform: linux/x86_64
     ports:
       - 3304:3306
     volumes:
