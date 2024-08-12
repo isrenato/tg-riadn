@@ -70,14 +70,30 @@ services:
     tesseractOCRService:
         class: App\Service\TesseractOCRService
 
-    imageManager:
-        class: App\Manager\ImageManager
+    geminiClient:
+        class: GeminiAPI\Client
         arguments:
-          $telegramImageService: "@telegramImageService"
-          $userRepository: "@telegramUserRepository"
-          $manager: "@manager"
-          $fileService: "@telegramFileService"
+          $apiKey: '%env(string:GEMINI_API_KEY)%'
+
+    geminiService:
+        class: App\Service\GeminiService
+        arguments:
+          $client: "@geminiClient"
+
+    addressManager:
+        class: App\Manager\AddressManager
+        arguments:
           $tesseractService: "@tesseractOCRService"
+          $geminiService: "@geminiService"
+
+    imageManager:
+      class: App\Manager\ImageManager
+      arguments:
+        $telegramImageService: "@telegramImageService"
+        $userRepository: "@telegramUserRepository"
+        $manager: "@manager"
+        $fileService: "@telegramFileService"
+        $addressManager: "@addressManager"
 
     App\Controller\PhotoMessageController:
           class: App\Controller\PhotoMessageController

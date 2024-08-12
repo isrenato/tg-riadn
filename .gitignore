@@ -10,6 +10,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /.idea
+/.vscode
 docker/server-logs
 
 ###> phpstan/phpstan ###

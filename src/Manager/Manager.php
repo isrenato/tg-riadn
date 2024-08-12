@@ -7,7 +7,7 @@ namespace App\Manager;
 use App\Entity\EntityInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final readonly class Manager implements ManagerInterface
+class Manager implements ManagerInterface
 {
     public function __construct(
         private EntityManagerInterface $manager

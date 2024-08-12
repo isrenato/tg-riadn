@@ -12,6 +12,8 @@ TG_API_TOKEN=
 TG_WEBHOOK=
 
 DATABASE_URL=
+
+GEMINI_API_KEY=
 ```
 
 ### Configure bundle

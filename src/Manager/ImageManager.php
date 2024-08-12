@@ -7,7 +7,6 @@ namespace App\Manager;
 use App\Entity\Image;
 use App\Service\TelegramFileServiceInterface;
 use App\Service\TelegramImageServiceInterface;
-use App\Service\TesseractOCRServiceInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Luzrain\TelegramBotApi\Type\Message;
 
@@ -20,7 +19,7 @@ class ImageManager implements ImageManagerInterface
         private ServiceEntityRepository $userRepository,
         private ManagerInterface $manager,
         private TelegramFileServiceInterface $fileService,
-        private TesseractOCRServiceInterface $tesseractService
+        private AddressManagerInterface $addressManager
     ) {
     }
 
@@ -32,7 +31,7 @@ class ImageManager implements ImageManagerInterface
         $downloadedFilePath = $this->fileService->downloadFile($fileData->filePath);
         $this->create($image);
 
-        return $this->tesseractService->recognizeTextFromImage($downloadedFilePath);
+        return $this->addressManager->recognizeAddress($downloadedFilePath);
     }
 
     private function create(Image $entity): Image
