@@ -21,10 +21,6 @@ class PhotoMessageController extends TelegramCommand
     #[OnEvent(event: Message::class, priority: 9)]
     public function __invoke(Type\Message $message): ?SendMessage
     {
-        if (null === $message->photo) {
-            return null;
-        }
-
         $text = $this->manager->process($message);
         $inlineKeyboard =
             new Type\ReplyKeyboardMarkup(
