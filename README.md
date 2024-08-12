@@ -1,4 +1,4 @@
-# TelegramBot for ordering postal addresses
+# TelegramBot for recognising addresses in photos
 [![PHP >=8.2](https://img.shields.io/badge/PHP->=8.2-777bb3.svg?style=flat)](https://www.php.net/releases/8.2/en.php)
 ![Symfony ^7.0](https://img.shields.io/badge/Symfony-^7.0-374151.svg?style=flat)
 
