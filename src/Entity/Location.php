@@ -25,6 +25,9 @@ class Location implements EntityInterface
     #[ORM\Column]
     private bool $processed = false;
 
+    #[ORM\Column]
+    private bool $isCurrent = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +72,18 @@ class Location implements EntityInterface
     public function setProcessed(bool $processed): static
     {
         $this->processed = $processed;
+
+        return $this;
+    }
+
+    public function isCurrent(): bool
+    {
+        return $this->isCurrent;
+    }
+
+    public function setCurrent(bool $isCurrent): static
+    {
+        $this->isCurrent = $isCurrent;
 
         return $this;
     }
