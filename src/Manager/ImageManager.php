@@ -31,7 +31,7 @@ class ImageManager implements ImageManagerInterface
         $downloadedFilePath = $this->fileService->downloadFile($fileData->filePath);
         $this->create($image);
 
-        return $this->addressManager->recognizeAddress($downloadedFilePath);
+         return $this->addressManager->recognizeAddress($downloadedFilePath);
     }
 
     private function create(Image $entity): Image
