@@ -6,5 +6,5 @@ namespace App\Manager;
 
 interface AddressManagerInterface
 {
-    public function recognizeAddress(string $filePath): string;
+    public function recognizeAddress(string $filePath, int $userId): string;
 }

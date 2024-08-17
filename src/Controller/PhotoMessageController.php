@@ -26,17 +26,10 @@ class PhotoMessageController extends TelegramCommand
         }
 
         $text = $this->manager->process($message);
-        $inlineKeyboard =
-            new Type\ReplyKeyboardMarkup(
-                keyboard: Type\KeyboardButtonArrayBuilder::create()->addButton(
-                    new Type\KeyboardButton(text: 'Calculate')
-                )
-            );
 
         return new SendMessage(
             chatId: $message->chat->id,
-            text: $text,
-            replyMarkup: $inlineKeyboard
+            text: $text
         );
     }
 }

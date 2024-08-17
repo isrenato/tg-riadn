@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Manager implements ManagerInterface
@@ -22,6 +23,15 @@ class Manager implements ManagerInterface
 
     public function update(): void
     {
+        $this->manager->flush();
+    }
+
+    public function createMultiply(ArrayCollection $entities): void
+    {
+        foreach ($entities as $entity) {
+            $this->manager->persist($entity);
+        }
+
         $this->manager->flush();
     }
 }
