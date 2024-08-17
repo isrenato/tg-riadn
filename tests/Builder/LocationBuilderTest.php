@@ -8,7 +8,6 @@ use App\Builder\LocationBuilder;
 use App\Entity\Location;
 use App\Entity\TelegramUser;
 use PHPUnit\Framework\TestCase;
-use TypeError;
 
 class LocationBuilderTest extends TestCase
 {
@@ -41,7 +40,7 @@ class LocationBuilderTest extends TestCase
         $address = 'Test Address';
         $builder = new LocationBuilder();
 
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
         $builder->build(null, $address);
     }
 }

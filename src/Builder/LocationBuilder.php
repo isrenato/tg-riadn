@@ -9,10 +9,11 @@ use App\Entity\TelegramUser;
 
 class LocationBuilder
 {
-    public function build(TelegramUser $telegramUser, string $address): Location
+    public function build(TelegramUser $telegramUser, string $address, bool $isCurrent = false): Location
     {
         return (new Location())
             ->setTelegramUser($telegramUser)
-            ->setAddress($address);
+            ->setAddress($address)
+            ->setCurrent($isCurrent);
     }
 }
