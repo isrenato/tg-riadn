@@ -36,6 +36,9 @@ services:
     telegramUserRepository:
         class: App\Repository\TelegramUserRepository
 
+    locationRepository:
+      class: App\Repository\LocationRepository
+
     manager:
         class: App\Manager\Manager
 
@@ -96,6 +99,7 @@ services:
         class: App\Manager\LocationManager
         arguments:
           $userRepository: "@telegramUserRepository"
+          $locationRepository: "@locationRepository"
           $manager: "@manager"
           $locationBuilder: "@locationBuilder"
 

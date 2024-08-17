@@ -13,5 +13,7 @@ interface ManagerInterface
 
     public function update(): void;
 
+    public function delete(EntityInterface $entity): void;
+
     public function createMultiply(ArrayCollection $entities): void;
 }
