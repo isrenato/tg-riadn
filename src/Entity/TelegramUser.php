@@ -34,13 +34,9 @@ class TelegramUser implements EntityInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'telegramUser', orphanRemoval: true)]
-    private Collection $images;
-
     public function __construct()
     {
         $this->locations = new ArrayCollection();
-        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,31 +136,5 @@ class TelegramUser implements EntityInterface
     public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTimeImmutable();
-    }
-
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setTelegramUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            if ($image->getTelegramUser() === $this) {
-                $image->setTelegramUser(null);
-            }
-        }
-
-        return $this;
     }
 }

@@ -80,18 +80,22 @@ services:
         arguments:
           $client: "@geminiClient"
 
+    locationBuilder:
+        class: App\Builder\LocationBuilder
+
     addressManager:
         class: App\Manager\AddressManager
         arguments:
           $tesseractService: "@tesseractOCRService"
           $geminiService: "@geminiService"
+          $userRepository: "@telegramUserRepository"
+          $manager: "@manager"
+          $locationBuilder: "@locationBuilder"
 
     imageManager:
       class: App\Manager\ImageManager
       arguments:
         $telegramImageService: "@telegramImageService"
-        $userRepository: "@telegramUserRepository"
-        $manager: "@manager"
         $fileService: "@telegramFileService"
         $addressManager: "@addressManager"
 
