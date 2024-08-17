@@ -92,14 +92,26 @@ services:
           $manager: "@manager"
           $locationBuilder: "@locationBuilder"
 
+    locationManager:
+        class: App\Manager\LocationManager
+        arguments:
+          $userRepository: "@telegramUserRepository"
+          $manager: "@manager"
+          $locationBuilder: "@locationBuilder"
+
     imageManager:
-      class: App\Manager\ImageManager
-      arguments:
-        $telegramImageService: "@telegramImageService"
-        $fileService: "@telegramFileService"
-        $addressManager: "@addressManager"
+        class: App\Manager\ImageManager
+        arguments:
+          $telegramImageService: "@telegramImageService"
+          $fileService: "@telegramFileService"
+          $addressManager: "@addressManager"
 
     App\Controller\PhotoMessageController:
-          class: App\Controller\PhotoMessageController
-          arguments:
-            $manager: "@imageManager"
+        class: App\Controller\PhotoMessageController
+        arguments:
+          $manager: "@imageManager"
+
+    App\Controller\LocationMessageController:
+        class: App\Controller\LocationMessageController
+        arguments:
+          $manager: "@locationManager"
