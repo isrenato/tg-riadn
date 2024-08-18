@@ -26,6 +26,12 @@ class Manager implements ManagerInterface
         $this->manager->flush();
     }
 
+    public function delete(EntityInterface $entity): void
+    {
+        $this->manager->remove($entity);
+        $this->manager->flush();
+    }
+
     public function createMultiply(ArrayCollection $entities): void
     {
         foreach ($entities as $entity) {

@@ -10,23 +10,29 @@ use App\Repository\TelegramUserRepository;
 use App\Service\GeminiServiceInterface;
 use App\Service\TesseractOCRServiceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use thiagoalessio\TesseractOCR\UnsuccessfulCommandException;
 
 class AddressManager implements AddressManagerInterface
 {
     private const QUERY = 'get comma-separated addresses from string ';
 
     public function __construct(
-        private TesseractOCRServiceInterface $tesseractService,
-        private GeminiServiceInterface $geminiService,
-        private TelegramUserRepository $userRepository,
-        private ManagerInterface $manager,
-        private LocationBuilder $locationBuilder
+        private readonly TesseractOCRServiceInterface $tesseractService,
+        private readonly GeminiServiceInterface $geminiService,
+        private readonly TelegramUserRepository $userRepository,
+        private readonly ManagerInterface $manager,
+        private readonly LocationBuilder $locationBuilder
     ) {
     }
 
-    public function recognizeAddress(string $filePath, int $userId): string
+    public function recognizeAddress(string $filePath, int $userId): ?string
     {
-        $text = $this->tesseractService->recognizeTextFromImage($filePath);
+        try {
+            $text = $this->tesseractService->recognizeTextFromImage($filePath);
+        } catch (UnsuccessfulCommandException $e) {
+            return null;
+        }
+
         $addresses = $this->geminiService->ask(sprintf('%s %s', self::QUERY, $text));
         $this->processAddresses($addresses, $userId);
 

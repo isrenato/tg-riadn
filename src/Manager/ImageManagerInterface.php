@@ -8,5 +8,5 @@ use Luzrain\TelegramBotApi\Type\Message;
 
 interface ImageManagerInterface
 {
-    public function process(Message $message): string;
+    public function process(Message $message): ?string;
 }

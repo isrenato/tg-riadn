@@ -29,7 +29,7 @@ class LocationMessageController extends TelegramCommand
 
         return new SendMessage(
             chatId: $message->chat->id,
-            text: 'Your location has been added'
+            text: 'Your location has been added',
         );
     }
 }

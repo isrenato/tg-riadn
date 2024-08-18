@@ -30,11 +30,20 @@ services:
         tags:
             - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
 
+    App\EventListener\ExceptionUnsuccessfulCommandListener:
+      tags:
+        - { name: kernel.event_listener, event: kernel.exception }
+      arguments:
+        $logger: "@logger"
+
     telegramUserDataTransfomer:
         class: App\DataTransformer\TGUserDataTransformer
 
     telegramUserRepository:
         class: App\Repository\TelegramUserRepository
+
+    locationRepository:
+      class: App\Repository\LocationRepository
 
     manager:
         class: App\Manager\Manager
@@ -96,6 +105,7 @@ services:
         class: App\Manager\LocationManager
         arguments:
           $userRepository: "@telegramUserRepository"
+          $locationRepository: "@locationRepository"
           $manager: "@manager"
           $locationBuilder: "@locationBuilder"
 
