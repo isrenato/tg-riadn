@@ -7,9 +7,8 @@ namespace App\Tests\Builder\GoogleMaps;
 use App\Builder\GoogleMaps\PostalAddressBuilder;
 use App\Model\GoogleMap\PostalAddress;
 use PHPUnit\Framework\TestCase;
-use TypeError;
 
-class PostalAddressBuilderTest extends  TestCase
+class PostalAddressBuilderTest extends TestCase
 {
     public function testBuildWithValidAddress(): void
     {
@@ -40,21 +39,21 @@ class PostalAddressBuilderTest extends  TestCase
 
     public function testBuildWithNullAddress(): void
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
 
         PostalAddressBuilder::build(null);
     }
 
     public function testBuildWithNumericAddress(): void
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
 
         PostalAddressBuilder::build(12345);
     }
 
     public function testBuildWithArrayAddress(): void
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
 
         PostalAddressBuilder::build(['123 Main St']);
     }

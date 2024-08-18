@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Builder\GoogleMaps;
 
-use PHPUnit\Framework\TestCase;
 use App\Builder\GoogleMaps\RouteDataBuilder;
-use App\Model\GoogleMap\RouteData;
-use App\Model\GoogleMap\Origin;
+use App\Model\GoogleMap\Coordinate;
 use App\Model\GoogleMap\Destination;
 use App\Model\GoogleMap\Location;
-use App\Model\GoogleMap\Coordinate;
+use App\Model\GoogleMap\Origin;
+use App\Model\GoogleMap\RouteData;
+use PHPUnit\Framework\TestCase;
 
 class RouteDataBuilderTest extends TestCase
 {
@@ -54,7 +54,7 @@ class RouteDataBuilderTest extends TestCase
             ),
             (new Location())->setLatLng(
                 (new Coordinate())->setLatitude(36.169941)->setLongitude(-115.139832)
-            )
+            ),
         ];
 
         $builder = new RouteDataBuilder();
@@ -77,7 +77,7 @@ class RouteDataBuilderTest extends TestCase
             ),
             (new Location())->setLatLng(
                 (new Coordinate())->setLatitude(36.169941)->setLongitude(-115.139832)
-            )
+            ),
         ];
 
         $builder = new RouteDataBuilder();
@@ -96,7 +96,6 @@ class RouteDataBuilderTest extends TestCase
         $this->assertEquals($destinationLat, $routeData->getDestination()->getLocation()->getLatLng()->getLatitude());
         $this->assertEquals($destinationLng, $routeData->getDestination()->getLocation()->getLatLng()->getLongitude());
 
-        // Verify Intermediates
         $this->assertEquals($intermediates, $routeData->getIntermediates());
     }
 
@@ -113,11 +112,9 @@ class RouteDataBuilderTest extends TestCase
             ->withDestination($destinationLat, $destinationLng)
             ->build();
 
-        // Verify Origin
         $this->assertEquals($originLat, $routeData->getOrigin()->getLocation()->getLatLng()->getLatitude());
         $this->assertEquals($originLng, $routeData->getOrigin()->getLocation()->getLatLng()->getLongitude());
 
-        // Verify Destination
         $this->assertEquals($destinationLat, $routeData->getDestination()->getLocation()->getLatLng()->getLatitude());
         $this->assertEquals($destinationLng, $routeData->getDestination()->getLocation()->getLatLng()->getLongitude());
     }
