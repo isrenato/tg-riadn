@@ -30,6 +30,12 @@ services:
         tags:
             - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
 
+    App\EventListener\ExceptionUnsuccessfulCommandListener:
+      tags:
+        - { name: kernel.event_listener, event: kernel.exception }
+      arguments:
+        $logger: "@logger"
+
     telegramUserDataTransfomer:
         class: App\DataTransformer\TGUserDataTransformer
 

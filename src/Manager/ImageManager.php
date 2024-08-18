@@ -19,7 +19,7 @@ class ImageManager implements ImageManagerInterface
     ) {
     }
 
-    public function process(Message $message): string
+    public function process(Message $message): ?string
     {
         $fileData = $this->telegramImageService->getImageUrl($message->photo[self::HR_IMAGE]->fileId);
         $downloadedFilePath = $this->fileService->downloadFile($fileData->filePath);
