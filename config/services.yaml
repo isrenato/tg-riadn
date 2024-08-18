@@ -21,14 +21,14 @@ services:
       class: GuzzleHttp\Psr7\HttpFactory
 
     Symfony\Component\Serializer\Encoder\JsonEncoder:
-        class: Symfony\Component\Serializer\Encoder\JsonEncoder
-        tags:
-            - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
+      class: Symfony\Component\Serializer\Encoder\JsonEncoder
+      tags:
+          - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
 
     Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
-        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
-        tags:
-            - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
+      class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+      tags:
+          - { name: Symfony\Component\Serializer\Serializer, priority: -995 }
 
     App\EventListener\ExceptionUnsuccessfulCommandListener:
       tags:
@@ -37,28 +37,28 @@ services:
         $logger: "@logger"
 
     telegramUserDataTransfomer:
-        class: App\DataTransformer\TGUserDataTransformer
+      class: App\DataTransformer\TGUserDataTransformer
 
     telegramUserRepository:
-        class: App\Repository\TelegramUserRepository
+      class: App\Repository\TelegramUserRepository
 
     locationRepository:
       class: App\Repository\LocationRepository
 
     manager:
-        class: App\Manager\Manager
+      class: App\Manager\Manager
 
     telegramUserManager:
-        class: App\Manager\TelegramUserManager
-        arguments:
-          $transformer: "@telegramUserDataTransfomer"
-          $repository: "@telegramUserRepository"
-          $manager: "@manager"
+      class: App\Manager\TelegramUserManager
+      arguments:
+        $transformer: "@telegramUserDataTransfomer"
+        $repository: "@telegramUserRepository"
+        $manager: "@manager"
 
     App\Controller\StartCommandController:
-        class: App\Controller\StartCommandController
-        arguments:
-          $manager: "@telegramUserManager"
+      class: App\Controller\StartCommandController
+      arguments:
+        $manager: "@telegramUserManager"
 
     telegramBotApiProvider:
       class: Luzrain\TelegramBotApi\BotApi
@@ -69,59 +69,84 @@ services:
         $token: '%env(string:TG_API_TOKEN)%'
 
     telegramImageService:
-        class: App\Service\TelegramImageService
-        arguments:
-          $botApiProvider: "@telegramBotApiProvider"
+      class: App\Service\TelegramImageService
+      arguments:
+        $botApiProvider: "@telegramBotApiProvider"
 
     telegramFileService:
-        class: App\Service\TelegramFileService
+      class: App\Service\TelegramFileService
 
     tesseractOCRService:
-        class: App\Service\TesseractOCRService
+      class: App\Service\TesseractOCRService
 
     geminiClient:
-        class: GeminiAPI\Client
-        arguments:
-          $apiKey: '%env(string:GEMINI_API_KEY)%'
+      class: GeminiAPI\Client
+      arguments:
+        $apiKey: '%env(string:GEMINI_API_KEY)%'
+
+    googleMapsClient:
+      class: yidas\googleMaps\Client
+      arguments:
+        $optParams: '%env(string:GOOGLE_MAPS_API_KEY)%'
 
     geminiService:
-        class: App\Service\GeminiService
-        arguments:
-          $client: "@geminiClient"
+      class: App\Service\GeminiService
+      arguments:
+        $client: "@geminiClient"
+
+    googleRoutesService:
+      class: App\Service\GoogleRoutesService
+#      arguments:
+#        $client: "@googleMapsClient"
 
     locationBuilder:
-        class: App\Builder\LocationBuilder
+      class: App\Builder\LocationBuilder
+
+    routeDataBuilder:
+      class: App\Builder\GoogleMaps\RouteDataBuilder
+
+    postalAddressBuilder:
+      class: App\Builder\GoogleMaps\PostalAddressBuilder
 
     addressManager:
-        class: App\Manager\AddressManager
-        arguments:
-          $tesseractService: "@tesseractOCRService"
-          $geminiService: "@geminiService"
-          $userRepository: "@telegramUserRepository"
-          $manager: "@manager"
-          $locationBuilder: "@locationBuilder"
+      class: App\Manager\AddressManager
+      arguments:
+        $tesseractService: "@tesseractOCRService"
+        $geminiService: "@geminiService"
+        $userRepository: "@telegramUserRepository"
+        $manager: "@manager"
+        $locationBuilder: "@locationBuilder"
 
     locationManager:
-        class: App\Manager\LocationManager
-        arguments:
-          $userRepository: "@telegramUserRepository"
-          $locationRepository: "@locationRepository"
-          $manager: "@manager"
-          $locationBuilder: "@locationBuilder"
+      class: App\Manager\LocationManager
+      arguments:
+        $userRepository: "@telegramUserRepository"
+        $locationRepository: "@locationRepository"
+        $manager: "@manager"
+        $locationBuilder: "@locationBuilder"
 
     imageManager:
-        class: App\Manager\ImageManager
-        arguments:
-          $telegramImageService: "@telegramImageService"
-          $fileService: "@telegramFileService"
-          $addressManager: "@addressManager"
+      class: App\Manager\ImageManager
+      arguments:
+        $telegramImageService: "@telegramImageService"
+        $fileService: "@telegramFileService"
+        $addressManager: "@addressManager"
+
+    routeManager:
+      class: App\Manager\RouteManager
+      arguments:
+        $googleRoutesService: "@googleRoutesService"
+        $routeDataBuilder: "@routeDataBuilder"
+        $postalAddressBuilder: "@postalAddressBuilder"
+        $locationRepository: "@locationRepository"
+        $manager: "@manager"
 
     App\Controller\PhotoMessageController:
-        class: App\Controller\PhotoMessageController
-        arguments:
-          $manager: "@imageManager"
+      class: App\Controller\PhotoMessageController
+      arguments:
+        $manager: "@imageManager"
 
     App\Controller\LocationMessageController:
-        class: App\Controller\LocationMessageController
-        arguments:
-          $manager: "@locationManager"
+      class: App\Controller\LocationMessageController
+      arguments:
+        $manager: "@locationManager"

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Manager;
 
 use App\Builder\LocationBuilder;
-use App\Entity\Location as LocationEntity;
 use App\Repository\LocationRepository;
 use App\Repository\TelegramUserRepository;
 use Luzrain\TelegramBotApi\Type\Message;
@@ -16,11 +15,12 @@ class LocationManager implements LocationManagerInterface
         private TelegramUserRepository $userRepository,
         private LocationRepository $locationRepository,
         private ManagerInterface $manager,
-        private LocationBuilder $locationBuilder
+        private LocationBuilder $locationBuilder,
+        private RouteManagerInterface $routeManager
     ) {
     }
 
-    public function process(Message $message): LocationEntity
+    public function process(Message $message): string
     {
         $user = $this->userRepository->findOneBy(['telegramId' => $message->from->id]);
         $userLocation = $this->locationBuilder->build(
@@ -35,7 +35,7 @@ class LocationManager implements LocationManagerInterface
         $this->clearCurrentUserLocation($user->getId());
         $this->manager->create($userLocation);
 
-        return $userLocation;
+        return $this->routeManager->process($message->location, $user);
     }
 
     private function clearCurrentUserLocation(int $userId): void

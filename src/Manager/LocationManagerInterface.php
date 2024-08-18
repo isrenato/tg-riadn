@@ -9,5 +9,5 @@ use Luzrain\TelegramBotApi\Type\Message;
 
 interface LocationManagerInterface
 {
-    public function process(Message $message): LocationEntity;
+    public function process(Message $message): string;
 }
