@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use Monolog\Logger;
+use Psr\Log\LogLevel;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -27,7 +28,7 @@ final class ExceptionUnsuccessfulCommandListener
         }
 
         $this->logger->log(
-            level: 3,
+            level: LogLevel::ERROR,
             message: $exception->getMessage()
         );
 
