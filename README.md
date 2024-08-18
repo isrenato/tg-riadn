@@ -14,6 +14,8 @@ TG_WEBHOOK=
 DATABASE_URL=
 
 GEMINI_API_KEY=
+
+GOOGLE_MAPS_API_KEY=
 ```
 
 ### Configure bundle
