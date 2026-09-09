@@ -10,7 +10,7 @@ use Luzrain\TelegramBotApi\Type\Message;
 
 class ImageManager implements ImageManagerInterface
 {
-    private const HR_IMAGE = 3;
+    private const HR_IMAGE = 2;
 
     public function __construct(
         private TelegramImageServiceInterface $telegramImageService,

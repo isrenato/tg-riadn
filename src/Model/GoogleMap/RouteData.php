@@ -7,6 +7,8 @@ namespace App\Model\GoogleMap;
 class RouteData
 {
     private const DEFAULT_TRAVEL_MODE = 'DRIVE';
+
+    private const DEFAULT_ROUTING_PREFERENCE = 'TRAFFIC_AWARE';
     private Origin $origin;
 
     private array $intermediates;
@@ -14,6 +16,8 @@ class RouteData
     private Destination $destination;
 
     private string $travelMode = self::DEFAULT_TRAVEL_MODE;
+
+    private string $routingPreference = self::DEFAULT_ROUTING_PREFERENCE;
 
     private bool $optimizeWaypointOrder = true;
 
@@ -61,6 +65,18 @@ class RouteData
     public function setTravelMode(string $travelMode): static
     {
         $this->travelMode = $travelMode;
+
+        return $this;
+    }
+
+    public function getRoutingPreference(): string
+    {
+        return $this->routingPreference;
+    }
+
+    public function setRoutingPreference(string $routingPreference): static
+    {
+        $this->routingPreference = $routingPreference;
 
         return $this;
     }
