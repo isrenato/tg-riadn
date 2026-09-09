@@ -14,7 +14,7 @@ use thiagoalessio\TesseractOCR\UnsuccessfulCommandException;
 
 class AddressManager implements AddressManagerInterface
 {
-    private const QUERY = 'get comma-separated addresses from string ';
+    private const QUERY = 'get semicolon-separated addresses from string ';
 
     public function __construct(
         private readonly TesseractOCRServiceInterface $tesseractService,
@@ -43,7 +43,7 @@ class AddressManager implements AddressManagerInterface
     {
         $user = $this->userRepository->findOneBy(['telegramId' => $userId]);
 
-        $addressesArray = explode(PHP_EOL, $addresses);
+        $addressesArray = explode(';', $addresses);
         $addressesArray = array_map(
             fn (string $address): Location => $this->locationBuilder->build($user, $address),
             $addressesArray
