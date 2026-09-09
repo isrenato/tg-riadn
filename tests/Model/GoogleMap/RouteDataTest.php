@@ -58,6 +58,15 @@ class RouteDataTest extends TestCase
         $this->assertEquals('WALK', $routeData->getTravelMode());
     }
 
+    public function testSetAndGetRoutingPreference(): void
+    {
+        $routeData = new RouteData();
+        $this->assertEquals('TRAFFIC_AWARE', $routeData->getRoutingPreference());  // Testing default value
+
+        $routeData->setRoutingPreference('TRAFFIC_AWARE_OPTIMAL');
+        $this->assertEquals('TRAFFIC_AWARE_OPTIMAL', $routeData->getRoutingPreference());
+    }
+
     public function testSetAndGetOptimizeWaypointOrder(): void
     {
         $routeData = new RouteData();
@@ -78,12 +87,14 @@ class RouteDataTest extends TestCase
             ->setDestination($destination)
             ->setIntermediates($intermediates)
             ->setTravelMode('BICYCLE')
+            ->setRoutingPreference('TRAFFIC_UNAWARE')
             ->setOptimizeWaypointOrder(false);
 
         $this->assertSame($origin, $routeData->getOrigin());
         $this->assertSame($destination, $routeData->getDestination());
         $this->assertEquals($intermediates, $routeData->getIntermediates());
         $this->assertEquals('BICYCLE', $routeData->getTravelMode());
+        $this->assertEquals('TRAFFIC_UNAWARE', $routeData->getRoutingPreference());
         $this->assertFalse($routeData->isOptimizeWaypointOrder());
     }
 }
