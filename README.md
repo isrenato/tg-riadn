@@ -81,3 +81,9 @@ $ bin/console telegram:webhook:update
 
 Note that each time you change *webhook* and *allowed_updates* options in configuration files you should run this command for update telegram bot settings.
 
+### Code quality
+```bash
+$ composer php-md    # mess detector over src/
+$ composer big0nia    # flags N+1-shaped nested loops/joins over src/
+```
+

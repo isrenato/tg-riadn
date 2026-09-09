@@ -14,7 +14,6 @@
         "guzzlehttp/guzzle": "^7.9",
         "luzrain/telegram-bot-bundle": "*",
         "nyholm/psr7": "*",
-        "phpstan/phpstan-phpunit": "^1.4",
         "symfony/console": "7.1.*",
         "symfony/dotenv": "7.1.*",
         "symfony/flex": "^2",
@@ -30,11 +29,13 @@
         "yidas/google-maps-services": "^1.2"
     },
     "require-dev": {
+        "doloto/big0nia": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.61",
         "mockery/mockery": "^1.6",
         "phpmd/phpmd": "^2.15",
         "phpstan/phpstan": "^1.11",
         "phpstan/phpstan-doctrine": "^1.5",
+        "phpstan/phpstan-phpunit": "^1.4",
         "phpunit/phpunit": "^11.3",
         "symfony/maker-bundle": "^1.60"
     },
@@ -68,6 +69,7 @@
     },
     "scripts": {
         "php-md": "@php vendor/bin/phpmd src/ phpmd.xml text cleancode,codesize,controversial,design,naming,unusedcode",
+        "big0nia": "@php vendor/bin/big0nia analyse src/",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
